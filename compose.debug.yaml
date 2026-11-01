@@ -1,0 +1,6 @@
+services:
+  jd2:
+    image: jd2
+    build:
+      context: .
+      dockerfile: ./Dockerfile

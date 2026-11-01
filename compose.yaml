@@ -1,0 +1,9 @@
+services:
+  jd2:
+    image: jd2
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3128:3128"
