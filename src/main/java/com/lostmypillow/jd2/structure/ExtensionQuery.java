@@ -8,4 +8,8 @@ public record ExtensionQuery(
     Boolean installed,
     Boolean name,
     String pattern
-) {}
+) {
+    public ExtensionQuery() {
+        this(null, null, null, null, null, null, null);
+    }
+}
