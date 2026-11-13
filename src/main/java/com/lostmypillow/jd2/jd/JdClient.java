@@ -1,20 +1,20 @@
 package com.lostmypillow.jd2.jd;
 
-import com.lostmypillow.jd2.jd.records.JdApiResponse;
+import com.lostmypillow.jd2.structure.Jd2Response;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 
 @HttpExchange("/jd")
 public interface JdClient {
     @GetExchange("/getCoreRevision")
-    JdApiResponse<Integer> getCoreRevision();
+    Jd2Response<Integer> getCoreRevision();
 
     @GetExchange("/uptime")
-    JdApiResponse<Long> getUptime();
+    Jd2Response<Long> getUptime();
 
     @GetExchange("/version")
-    JdApiResponse<Long> getVersion();
+    Jd2Response<Long> getVersion();
 
     @GetExchange("/refreshPlugins")
-    JdApiResponse<Boolean> refreshPlugins();
+    Jd2Response<Boolean> refreshPlugins();
 }

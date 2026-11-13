@@ -1,7 +1,7 @@
 package com.lostmypillow.jd2.jd;
 
 import com.lostmypillow.jd2.AbstractIntegrationTest;
-import com.lostmypillow.jd2.jd.records.JdApiResponse;
+import com.lostmypillow.jd2.structure.Jd2Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -19,11 +19,11 @@ class JdClientIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     void testAgainstRealJd() {
-        JdApiResponse<Integer> data = jdClient.getCoreRevision();
+        Jd2Response<Integer> data = jdClient.getCoreRevision();
         IO.println("data variable is " + data);
 
         assertNotNull(data);
-        assertInstanceOf(JdApiResponse.class, data, "data should be an instance of JdApiResponse");
+        assertInstanceOf(Jd2Response.class, data, "data should be an instance of JdApiResponse");
         assertInstanceOf(Integer.class, data.data(), "data.data() should be an instance of Integer");
     }
 

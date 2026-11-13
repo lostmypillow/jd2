@@ -1,6 +1,6 @@
 package com.lostmypillow.jd2.jd;
 
-import com.lostmypillow.jd2.jd.records.JdApiResponse;
+import com.lostmypillow.jd2.structure.Jd2Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -37,10 +37,10 @@ public class JdClientUnitTest {
                 """;
         mockServer.expect(requestTo("http://localhost:3128/jd/getCoreRevision")).andRespond(withSuccess(mockJsonResponse, MediaType.APPLICATION_JSON));
 
-        JdApiResponse<Integer> data = jdClient.getCoreRevision();
+        Jd2Response<Integer> data = jdClient.getCoreRevision();
 
         assertNotNull(data);
-        assertInstanceOf(JdApiResponse.class, data, "data should be an instance of JdApiResponse<Integer>");
+        assertInstanceOf(Jd2Response.class, data, "data should be an instance of JdApiResponse<Integer>");
         assertInstanceOf(Integer.class, data.data(), "data.data() should be an instance of Integer");
         assertEquals(42, data.data());
 
