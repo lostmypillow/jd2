@@ -1,6 +1,6 @@
 package com.lostmypillow.jd2.jd;
 
-import com.lostmypillow.jd2.jd.records.JdApiResponse;
+import com.lostmypillow.jd2.structure.Jd2Response;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +11,7 @@ public class JdService {
         this.client = client;
     }
 
-    private <T> T unwrap(JdApiResponse<T> response) {
+    private <T> T unwrap(Jd2Response<T> response) {
         if (response == null || response.data() == null) {
             throw new IllegalStateException("Response body or data field is null.");
         }
