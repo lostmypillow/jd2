@@ -8,4 +8,8 @@ public record AdvancedConfigQuery(
     Boolean includeExtensions,
     String pattern,
     Boolean values
-) {}
+) {
+    public AdvancedConfigQuery() {
+        this(null, null, null, null, null, null, null);
+    }
+}
