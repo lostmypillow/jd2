@@ -13,4 +13,8 @@ public record ArchiveSettings(
     List<String> passwords,
     Boolean removeDownloadLinksAfterExtraction,
     Boolean removeFilesAfterExtraction
-) {}
+) {
+    public ArchiveSettings() {
+        this(null, null, null, null, null, null, null);
+    }
+}
