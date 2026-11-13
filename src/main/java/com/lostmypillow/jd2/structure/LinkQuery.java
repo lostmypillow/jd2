@@ -22,4 +22,8 @@ public record LinkQuery(
     Integer startAt,
     Boolean status,
     Boolean url
-) {}
+) {
+    public LinkQuery() {
+        this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    }
+}
