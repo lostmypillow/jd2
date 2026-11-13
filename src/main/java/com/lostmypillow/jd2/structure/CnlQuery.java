@@ -16,4 +16,8 @@ public record CnlQuery(
     String referrer,
     String source,
     String urls
-) {}
+) {
+    public CnlQuery() {
+        this(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    }
+}
