@@ -17,4 +17,8 @@ public record PackageQuery(
     Boolean speed,
     Integer startAt,
     Boolean status
-) {}
+) {
+    public PackageQuery() {
+        this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    }
+}

@@ -10,6 +10,7 @@ import com.lostmypillow.jd2.device.DeviceClient;
 import com.lostmypillow.jd2.dialogs.DialogsClient;
 import com.lostmypillow.jd2.downloadcontroller.DownloadControllerClient;
 import com.lostmypillow.jd2.downloadevents.DownloadEventsClient;
+import com.lostmypillow.jd2.downloadsv2.DownloadsV2Client;
 import com.lostmypillow.jd2.jd.JdClient;
 import com.lostmypillow.jd2.linkgrabberv2.LinkGrabberClient;
 import com.lostmypillow.jd2.root.RootClient;
@@ -25,7 +26,7 @@ import tools.jackson.databind.ObjectMapper;
 
 @Configuration
 @ImportHttpServices({
-        JdClient.class, LinkGrabberClient.class, RootClient.class, AccountsClient.class, AccountsV2Client.class, CaptchaClient.class, CaptchaForwardClient.class, ConfigClient.class, ContentV2Client.class, DeviceClient.class, DialogsClient.class, DownloadControllerClient.class, DownloadEventsClient.class
+        JdClient.class, LinkGrabberClient.class, RootClient.class, AccountsClient.class, AccountsV2Client.class, CaptchaClient.class, CaptchaForwardClient.class, ConfigClient.class, ContentV2Client.class, DeviceClient.class, DialogsClient.class, DownloadControllerClient.class, DownloadEventsClient.class, DownloadsV2Client.class
 })
 @EnableAsync
 public class AppConfig {
