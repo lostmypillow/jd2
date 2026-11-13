@@ -5,4 +5,8 @@ public record APIQuery<V>(
     V forNullKey,
     Integer maxResults,
     Integer startAt
-) {}
+) {
+    public APIQuery() {
+        this(null, null, null, null);
+    }
+}
