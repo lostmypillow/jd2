@@ -1,6 +1,7 @@
 package com.lostmypillow.jd2;
 
 import com.lostmypillow.jd2.accounts.AccountsClient;
+import com.lostmypillow.jd2.accountsv2.AccountsV2Client;
 import com.lostmypillow.jd2.jd.JdClient;
 import com.lostmypillow.jd2.linkgrabberv2.LinkGrabberClient;
 import com.lostmypillow.jd2.root.RootClient;
@@ -16,7 +17,7 @@ import tools.jackson.databind.ObjectMapper;
 
 @Configuration
 @ImportHttpServices({
-        JdClient.class, LinkGrabberClient.class, RootClient.class, AccountsClient.class
+        JdClient.class, LinkGrabberClient.class, RootClient.class, AccountsClient.class, AccountsV2Client.class
 })
 @EnableAsync
 public class AppConfig {

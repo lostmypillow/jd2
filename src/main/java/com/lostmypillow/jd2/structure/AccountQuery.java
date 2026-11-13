@@ -39,4 +39,8 @@ public record AccountQuery(
             validUntil
         );
     }
+
+    public AccountQuery() {
+        this(null, null, null, null, null, null, null, (UnorderedList<Long>) null, null, null);
+    }
 }
