@@ -22,6 +22,7 @@ import com.lostmypillow.jd2.linkgrabberv2.LinkGrabberClient;
 import com.lostmypillow.jd2.log.LogClient;
 import com.lostmypillow.jd2.plugins.PluginsClient;
 import com.lostmypillow.jd2.polling.PollingClient;
+import com.lostmypillow.jd2.reconnect.ReconnectClient;
 import com.lostmypillow.jd2.root.RootClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +36,7 @@ import tools.jackson.databind.ObjectMapper;
 
 @Configuration
 @ImportHttpServices({
-        JdClient.class, LinkGrabberClient.class, RootClient.class, AccountsClient.class, AccountsV2Client.class, CaptchaClient.class, CaptchaForwardClient.class, ConfigClient.class, ContentV2Client.class, DeviceClient.class, DialogsClient.class, DownloadControllerClient.class, DownloadEventsClient.class, DownloadsV2Client.class, EventsClient.class, ExtensionsClient.class, ExtractionClient.class, FlashClient.class, LinkCollectorClient.class, LinkCrawlerClient.class, LogClient.class, PluginsClient.class, PollingClient.class
+        JdClient.class, LinkGrabberClient.class, RootClient.class, AccountsClient.class, AccountsV2Client.class, CaptchaClient.class, CaptchaForwardClient.class, ConfigClient.class, ContentV2Client.class, DeviceClient.class, DialogsClient.class, DownloadControllerClient.class, DownloadEventsClient.class, DownloadsV2Client.class, EventsClient.class, ExtensionsClient.class, ExtractionClient.class, FlashClient.class, LinkCollectorClient.class, LinkCrawlerClient.class, LogClient.class, PluginsClient.class, PollingClient.class, ReconnectClient.class
 })
 @EnableAsync
 public class AppConfig {
