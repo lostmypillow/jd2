@@ -4,4 +4,8 @@ public record LogFolder(
     Long created,
     Boolean current,
     Long lastModified
-) {}
+) {
+    public LogFolder() {
+        this(null, null, null);
+    }
+}
