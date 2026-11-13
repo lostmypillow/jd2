@@ -41,7 +41,7 @@ public interface LinkGrabberClient {
     /**
      * Lists crawled links
      *
-     * @param queryParams an {@link CrawledLinkQuery} object
+     * @param queryParams a stringified {@link CrawledLinkQuery} object
      * @return a {@link Jd2Response} containing a {@link List} of {@link CrawledLink}
      */
     @PostExchange("/queryLinks")
@@ -51,11 +51,11 @@ public interface LinkGrabberClient {
     /**
      * Lists crawled packages
      *
-     * @param queryParams an {@link CrawledPackageQuery} object
+     * @param queryParams a stringified {@link CrawledPackageQuery} object
      * @return a {@link Jd2Response} containing a {@link List} of {@link CrawledPackage}
      */
     @PostExchange("/queryPackages")
-    Jd2Response<List<CrawledPackage>> queryPackages(@RequestParam("queryParams") CrawledPackageQuery queryParams);
+    Jd2Response<List<CrawledPackage>> queryPackages(@RequestParam("queryParams") String queryParams);
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
 
@@ -79,10 +79,19 @@ public interface LinkGrabberClient {
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Cleans up links and packages
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     * @param action the {@link Action}
+     * @param mode the {@link Mode}
+     * @param selectionType the {@link SelectionType}
+     */
     @PostExchange("/cleanup")
     void cleanup(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds,
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds,
             @RequestParam("action") Action action,
             @RequestParam("mode") Mode mode,
             @RequestParam("selectionType") SelectionType selectionType
@@ -97,10 +106,18 @@ public interface LinkGrabberClient {
     @GetExchange("/getDownloadFolderHistorySelectionBase")
     Jd2Response<List<String>> getDownloadFolderHistorySelectionBase();
 
+    /**
+     * Gets download URLs
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     * @param urlDisplayTypes display types
+     * @return a {@link Jd2Response} containing a map of download URLs
+     */
     @GetExchange("/getDownloadUrls")
     Jd2Response<Map<String, List<Long>>> getDownloadUrls(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds,
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds,
             @RequestParam("urlDisplayTypes") String[] urlDisplayTypes
             // UrlDisplayTypeStorable not defined, we use string for now
     );
@@ -115,42 +132,75 @@ public interface LinkGrabberClient {
 
 
 
+    /**
+     * Moves links
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param afterLinkID destination after link ID
+     * @param destPackageID destination package ID
+     */
     @PostExchange("/moveLinks")
     void moveLinks(
-            @RequestParam("linkIds") long[] linkIds,
+            @RequestParam("linkIds") String linkIds,
             @RequestParam("afterLinkID") long afterLinkID,
             @RequestParam("destPackageID") long destPackageID
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Moves packages
+     *
+     * @param packageIds a stringified {@code long[]} of package IDs
+     * @param afterDestPackageId destination after package ID
+     */
     @PostExchange("/movePackages")
     void movePackages(
-            @RequestParam("packageIds") long[] packageIds,
+            @RequestParam("packageIds") String packageIds,
             @RequestParam("afterDestPackageId") long afterDestPackageId
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Moves links and packages to download list
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     */
     @PostExchange("/moveToDownloadlist")
     void moveToDownloadlist(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Moves links and packages to a new package
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param pkgIds a stringified {@code long[]} of package IDs
+     * @param newPkgName new package name
+     * @param downloadPath download path
+     */
     @PostExchange("/movetoNewPackage")
     void movetoNewPackage(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("pkgIds") long[] pkgIds,
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("pkgIds") String pkgIds,
             @RequestParam("newPkgName") String newPkgName,
             @RequestParam("downloadPath") String downloadPath
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
 
+    /**
+     * Removes links and packages
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     */
     @PostExchange("/removeLinks")
     void removeLinks(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
@@ -168,34 +218,62 @@ public interface LinkGrabberClient {
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Sets download directory for packages
+     *
+     * @param directory directory path
+     * @param packageIds a stringified {@code long[]} of package IDs
+     */
     @PostExchange("/setDownloadDirectory")
     void setDownloadDirectory(
             @RequestParam("directory") String directory,
-            @RequestParam("packageIds") long[] packageIds
+            @RequestParam("packageIds") String packageIds
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Sets download password
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     * @param pass password
+     * @return a {@link Jd2Response} containing a {@link Boolean}
+     */
     @PostExchange("/setDownloadPassword")
     Jd2Response<Boolean> setDownloadPassword(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds,
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds,
             @RequestParam("pass") String pass
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Sets enabled status for links and packages
+     *
+     * @param enabled enabled flag
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     */
     @PostExchange("/setEnabled")
     void setEnabled(
             @RequestParam("enabled") boolean enabled,
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Sets priority for links and packages
+     *
+     * @param priority the {@link Priority}
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     */
     @PostExchange("/setPriority")
     void setPriority(
             @RequestParam("priority") Priority priority,
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
@@ -206,16 +284,28 @@ public interface LinkGrabberClient {
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 
+    /**
+     * Splits package by hoster
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param pkgIds a stringified {@code long[]} of package IDs
+     */
     @PostExchange("/splitPackageByHoster")
     void splitPackageByHoster(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("pkgIds") long[] pkgIds
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("pkgIds") String pkgIds
     );
 
+    /**
+     * Starts online status check
+     *
+     * @param linkIds a stringified {@code long[]} of link IDs
+     * @param packageIds a stringified {@code long[]} of package IDs
+     */
     @PostExchange("/startOnlineStatusCheck")
     void startOnlineStatusCheck(
-            @RequestParam("linkIds") long[] linkIds,
-            @RequestParam("packageIds") long[] packageIds
+            @RequestParam("linkIds") String linkIds,
+            @RequestParam("packageIds") String packageIds
     );
     // Possible Error(s) ResponseCode 400 (Bad Request); Type:BAD_PARAMETERS; Description: Bad Parameter
 }

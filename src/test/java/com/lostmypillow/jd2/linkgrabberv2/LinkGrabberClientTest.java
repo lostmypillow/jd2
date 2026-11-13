@@ -40,7 +40,7 @@ class LinkGrabberClientTest {
 
     @Test
     void addLinkAndClearList() throws InterruptedException {
-        var addLinkResponse = linkGrabberClient.addLinks(new AddLinksQuery("http://releases.ubuntu.com/26.04/ubuntu-26.04.1-desktop-amd64.iso"));
+        var addLinkResponse = linkGrabberClient.addLinks(Json.stringify(new AddLinksQuery("http://releases.ubuntu.com/26.04/ubuntu-26.04.1-desktop-amd64.iso")));
 
         TimeUnit.SECONDS.sleep(5);
         var jobId = Optional.ofNullable(addLinkResponse.data()).map(LinkCollectingJob::id).orElseThrow();
@@ -58,10 +58,10 @@ class LinkGrabberClientTest {
             maxWaitSeconds--;
         }
 
-        var crawledLinks = linkGrabberClient.queryLinks(new CrawledLinkQuery()).data();
+        var crawledLinks = linkGrabberClient.queryLinks(Json.stringify(new CrawledLinkQuery())).data();
         IO.println("Queried links = " + crawledLinks);
         long[] crawledPackageUuids = crawledLinks.stream().mapToLong(CrawledLink::packageUUID).toArray();
-        var crawledPackages = linkGrabberClient.queryPackages(new CrawledPackageQuery(crawledPackageUuids)).data();
+        var crawledPackages = linkGrabberClient.queryPackages(Json.stringify(new CrawledPackageQuery(crawledPackageUuids))).data();
         IO.println("Crawled packages = " + crawledPackages);
         var packageCount = linkGrabberClient.getPackageCount().data();
 

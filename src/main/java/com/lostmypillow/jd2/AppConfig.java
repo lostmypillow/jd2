@@ -1,6 +1,7 @@
 package com.lostmypillow.jd2;
 
 import com.lostmypillow.jd2.jd.JdClient;
+import com.lostmypillow.jd2.linkgrabberv2.LinkGrabberClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import tools.jackson.databind.ObjectMapper;
 
 @Configuration
 @ImportHttpServices({
-        JdClient.class
+        JdClient.class, LinkGrabberClient.class
 })
 @EnableAsync
 public class AppConfig {
