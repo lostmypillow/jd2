@@ -3,7 +3,7 @@ services:
     image: jd2
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./build/Dockerfile
     restart: unless-stopped
     ports:
       - "3128:3128"
