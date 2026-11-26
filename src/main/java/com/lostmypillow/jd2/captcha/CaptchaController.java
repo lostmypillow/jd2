@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/captcha")
+@RequestMapping("/v1/captcha")
 public class CaptchaController {
     public final CaptchaClient client;
 

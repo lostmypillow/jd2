@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/downloadsV2")
+@RequestMapping("/v1/downloadsV2")
 public class DownloadsV2Controller {
     public final DownloadsV2Client client;
 

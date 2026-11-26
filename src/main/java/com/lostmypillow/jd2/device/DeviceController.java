@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/device")
+@RequestMapping("/v1/device")
 public class DeviceController {
     public final DeviceClient client;
 

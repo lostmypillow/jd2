@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/contentV2")
+@RequestMapping("/v1/contentV2")
 public class ContentV2Controller {
     public final ContentV2Client client;
 

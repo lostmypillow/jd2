@@ -12,16 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/v1")
 public class LinkGrabberController {
-    public final LinkGrabberService service;
     public final LinkGrabberClient client;
 
-    public LinkGrabberController(LinkGrabberService service, LinkGrabberClient client) {
-        this.service = service;
+    public LinkGrabberController(LinkGrabberClient client) {
         this.client = client;
     }
 
-    @GetMapping("/list")
+    @GetMapping("/queryLinks")
     public ResponseEntity<List<CrawledLink>> getLinkList() {
         return ResponseEntity.ok(client.queryLinks(Json.stringify(new CrawledLinkQuery())).data());
     }
@@ -31,10 +30,9 @@ public class LinkGrabberController {
         return ResponseEntity.ok(client.clearList().data());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addLink(@RequestBody String link) {
-        service.addLinkAsync(link);
-        return ResponseEntity.accepted().build();
+    @PostMapping("/addLinks")
+    public ResponseEntity<LinkCollectingJob> addLinks(@RequestParam("query") String query) {
+        return ResponseEntity.ok(client.addLinks(query).data());
     }
 
     @GetMapping("/isCollecting")

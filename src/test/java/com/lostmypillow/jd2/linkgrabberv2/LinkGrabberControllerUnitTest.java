@@ -23,16 +23,13 @@ import static org.mockito.Mockito.*;
 public class LinkGrabberControllerUnitTest {
 
     @Mock
-    private LinkGrabberService service;
-
-    @Mock
     private LinkGrabberClient client;
 
     private LinkGrabberController controller;
 
     @BeforeEach
     void setup() {
-        controller = new LinkGrabberController(service, client);
+        controller = new LinkGrabberController(client);
     }
 
     @Test
@@ -59,13 +56,16 @@ public class LinkGrabberControllerUnitTest {
     }
 
     @Test
-    void addLink_callsServiceAndReturnsAccepted() {
-        String link = "https://example.com/file.zip";
+    void addLinks_returnsLinkCollectingJob() {
+        String query = Json.stringify(new AddLinksQuery("https://example.com/file.zip"));
+        LinkCollectingJob job = new LinkCollectingJob(1L);
+        when(client.addLinks(query)).thenReturn(new Jd2Response<>(job));
 
-        ResponseEntity<Void> response = controller.addLink(link);
+        ResponseEntity<LinkCollectingJob> response = controller.addLinks(query);
 
-        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
-        verify(service).addLinkAsync(link);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(job, response.getBody());
+        verify(client).addLinks(query);
     }
 
     @Test

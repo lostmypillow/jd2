@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ui")
+@RequestMapping("/v1/ui")
 public class UiController {
     private final UiClient uiClient;
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/config")
+@RequestMapping("/v1/config")
 public class ConfigController {
     public final ConfigClient client;
 

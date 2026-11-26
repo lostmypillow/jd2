@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/plugins")
+@RequestMapping("/v1/plugins")
 public class PluginsController {
     private final PluginsClient pluginsClient;
 

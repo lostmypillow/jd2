@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/events")
+@RequestMapping("/v1/events")
 public class EventsController {
     public final EventsClient client;
 

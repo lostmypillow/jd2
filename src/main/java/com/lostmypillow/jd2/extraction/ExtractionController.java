@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/extraction")
+@RequestMapping("/v1/extraction")
 public class ExtractionController {
     public final ExtractionClient client;
 

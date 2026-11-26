@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/downloadevents")
+@RequestMapping("/v1/downloadevents")
 public class DownloadEventsController {
     public final DownloadEventsClient client;
 

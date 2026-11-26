@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/log")
+@RequestMapping("/v1/log")
 public class LogController {
     public final LogClient client;
 

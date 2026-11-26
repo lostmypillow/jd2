@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/session")
+@RequestMapping("/v1/session")
 public class SessionController {
     private final SessionClient sessionClient;
 

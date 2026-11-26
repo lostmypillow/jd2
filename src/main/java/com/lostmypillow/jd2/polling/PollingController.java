@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/polling")
+@RequestMapping("/v1/polling")
 public class PollingController {
     private final PollingClient pollingClient;
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/toolbar")
+@RequestMapping("/v1/toolbar")
 public class ToolbarController {
     private final ToolbarClient toolbarClient;
 

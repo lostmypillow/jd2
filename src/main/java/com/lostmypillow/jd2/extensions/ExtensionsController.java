@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/extensions")
+@RequestMapping("/v1/extensions")
 public class ExtensionsController {
     public final ExtensionsClient client;
 

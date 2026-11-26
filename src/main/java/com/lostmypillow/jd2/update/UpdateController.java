@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/update")
+@RequestMapping("/v1/update")
 public class UpdateController {
     private final UpdateClient updateClient;
 
