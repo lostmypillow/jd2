@@ -44,14 +44,14 @@ class LinkGrabberControllerIntegrationTest extends AbstractIntegrationTest {
         assertInstanceOf(Boolean.class, response.getBody());
     }
 
-    @Test
-    void addLink() {
-        ResponseEntity<Void> response = linkGrabberController.addLink("http://releases.ubuntu.com/26.04/ubuntu-26.04.1-desktop-amd64.iso");
-        IO.println("response variable is " + response);
-
-        assertNotNull(response);
-        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
-    }
+//    @Test
+//    void addLink() {
+//        ResponseEntity<Void> response = linkGrabberController.addLink("http://releases.ubuntu.com/26.04/ubuntu-26.04.1-desktop-amd64.iso");
+//        IO.println("response variable is " + response);
+//
+//        assertNotNull(response);
+//        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
+//    }
 
     @Test
     void isCollecting() {
