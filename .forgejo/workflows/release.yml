@@ -1,0 +1,43 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    needs: deploy-prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog from commits
+        run: |
+          CURRENT_TAG="${GITHUB_REF_NAME}"
+          PREV_TAG=$(git describe --tags --abbrev=0 "${CURRENT_TAG}^" 2>/dev/null || true)
+          
+          if [ -n "$PREV_TAG" ]; then
+            echo "## Changes since ${PREV_TAG}" > release_notes.md
+            git log "${PREV_TAG}..${CURRENT_TAG}" --no-merges --pretty=format:"- %s (%h)" >> release_notes.md
+          else
+            echo "## Initial Release" > release_notes.md
+            git log "${CURRENT_TAG}" --no-merges --pretty=format:"- %s (%h)" >> release_notes.md
+          fi
+
+      - name: Create Forgejo Release
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg tag "${GITHUB_REF_NAME}" \
+            --arg name "${GITHUB_REF_NAME}" \
+            --rawfile body release_notes.md \
+            '{tag_name: $tag, name: $name, body: $body, draft: false, prerelease: false}')
+          
+          curl -f -sS -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            "${GITHUB_SERVER_URL}/api/v1/repos/${GITHUB_REPOSITORY}/releases"
