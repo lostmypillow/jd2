@@ -7,7 +7,6 @@ on:
 
 jobs:
   release:
-    needs: deploy-prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
